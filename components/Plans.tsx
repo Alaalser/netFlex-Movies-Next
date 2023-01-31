@@ -28,7 +28,7 @@ function Plans({ products }: Props) {
     <div>
       <Head>
         <title>Netflix</title>
-        <link ref="Icon" href="/favicon.ico" />
+        <link ref="icon" href="/favicon.ico" />
       </Head>
       <header className="border-b border-white/10 bg-[#141414]">
         <Link href="/">
@@ -37,6 +37,7 @@ function Plans({ products }: Props) {
             width={150}
             height={90}
             className="cursor-pointer object-contain"
+            alt=""
           />
         </Link>
         <button
