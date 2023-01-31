@@ -24,7 +24,7 @@ function Account({ products }: Props) {
   return (
     <div className="">
       <Head>
-        <title>Account Settings - Netflix</title>
+        <title>Account - Netflix</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={`bg-[#141414]`}>
