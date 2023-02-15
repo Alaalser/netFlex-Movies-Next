@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/router";
 
@@ -12,8 +12,14 @@ interface Inputs {
 
 function Login() {
   const [login, setLogin] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
   const {
     register,
@@ -27,7 +33,7 @@ function Login() {
     }
   };
 
-  return (
+  return user ? null : (
     <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
       <Head>
         <title>NetFlix</title>
@@ -48,8 +54,8 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1
             className="
-        font-semibold text-4xl text-white  md:pt-16
-        "
+    font-semibold text-4xl text-white  md:pt-16
+    "
           >
             Sign In
           </h1>
@@ -84,7 +90,9 @@ function Login() {
                 className={`inline-block  rounded px-5 pb-2.5 pt-5 w-full text-sm text-white  bg-[#333] dark:bg-gray-700 border-0  outline-none peer ${
                   errors.email && "border-b-2 border-orange-500"
                 }`}
-                {...register("password", { required: "Password is required" })}
+                {...register("password", {
+                  required: "Password is required",
+                })}
               />
               <label
                 htmlFor="password"
