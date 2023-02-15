@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "rb.gy",
       },
+      {
+        protocol: "https",
+        hostname: "assets.nflxext.com",
+      },
     ],
   },
 };

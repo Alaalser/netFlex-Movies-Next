@@ -1,3 +1,4 @@
+import { registerFormStepState } from "@/atom/registerFormInputsState";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -8,6 +9,7 @@ import {
 
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useRecoilState } from "recoil";
 import { auth } from "../firebase";
 
 interface IAuth {
@@ -38,6 +40,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [error, setError] = useState(null);
   const [initialLoading, setInitialLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [formStep, setFormStep] = useRecoilState(registerFormStepState);
 
   useEffect(
     () =>
@@ -46,11 +49,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           // Logged in...
           setUser(user);
           setLoading(false);
+        } else if (router.pathname === "/login") {
+          setUser(null);
+          setLoading(true);
+          router.push("/login");
         } else {
           // Not logged in...
           setUser(null);
           setLoading(true);
-          router.push("/login");
+          router.push("/signUp");
         }
 
         setInitialLoading(false);
@@ -64,7 +71,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
-        router.push("/");
+        router.push("/signUp");
+        setFormStep("stepTow");
         setLoading(false);
       })
       .catch((error) => alert(error.message))
@@ -89,6 +97,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     signOut(auth)
       .then(() => {
         setUser(null);
+        setFormStep("email");
       })
       .catch((error) => alert(error.message))
       .finally(() => setLoading(false));
