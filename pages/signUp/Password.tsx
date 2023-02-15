@@ -56,7 +56,7 @@ const Password = () => {
             text-[#333333] text-lg mt-4 
         "
         >
-          Just a few more steps and you're done!
+          Just a few more steps you&apos;re and done!
         </p>
         <p
           className="
