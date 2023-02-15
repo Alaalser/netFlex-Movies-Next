@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+For strip you can use strip test cards:
+
+[https://stripe.com/docs/testing]
+
+| BRAND  |  Visa |
+| ------------- | ------------- |
+| NUMBER |   4242424242424242 |
+| CVC    |  Any 3 digits |
+| date   |  Any future date |
 
 ## Getting Started
 
